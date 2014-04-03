@@ -35,7 +35,11 @@ double approx_pi(size_t n)
 int main(int argc, const char* argv[])
 {
     size_t n = (argc == 1) ? 10000 : atol(argv[1]);
-    printf("calculating (%ld iterations)...\n", n);
+#if _OPENMP
+    printf("calculating parallel (%ld iterations)...\n", n);
+#else
+    printf("calculating single (%ld iterations)...\n", n);
+#endif
     printf("pi = %lf\n", approx_pi(n));
     return 0;
 }
