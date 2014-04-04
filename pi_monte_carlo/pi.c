@@ -13,7 +13,7 @@ double approx_pi(size_t n)
 {
     double x;
     double y;
-    int in = 0;
+    size_t in = 0;
     #pragma omp parallel
     {
 #if _OPENMP
@@ -22,7 +22,7 @@ double approx_pi(size_t n)
         unsigned int myseed = time(NULL);
 #endif
         #pragma omp for private(x, y) reduction(+:in)
-        for (int i = 0; i < n; i++) {
+        for (size_t i = 0; i < n; i++) {
             x = my_rand(&myseed);
             y = my_rand(&myseed);
             if (((x*x)+(y*y)) <= 1.0)
@@ -34,7 +34,7 @@ double approx_pi(size_t n)
 
 int main(int argc, const char* argv[])
 {
-    size_t n = (argc == 1) ? 10000 : atol(argv[1]);
+    size_t n = (argc == 1) ? 10000 : atoll(argv[1]);
 #if _OPENMP
     fprintf(stderr, "approximating π in parallel (%ld iterations) ...\n", n);
 #else
