@@ -1,10 +1,11 @@
-pi: pi.c
-ifeq ($(OPENMP), false)
-	gcc -o pi pi.c -std=gnu99
-else
-	gcc -o pi pi.c -fopenmp -std=gnu99
-endif
+all: pi-parallel pi-single
+
+pi-parallel: pi.c
+	gcc -fopenmp -std=gnu99 $< -o $@
+
+pi-single: pi.c
+	gcc -std=gnu99 $< -o $@
 	
 .PHONY: clean
 clean:
-	rm -rf pi
+	rm -rf pi-parallel pi-single
