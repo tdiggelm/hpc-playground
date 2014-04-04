@@ -36,10 +36,10 @@ int main(int argc, const char* argv[])
 {
     size_t n = (argc == 1) ? 10000 : atol(argv[1]);
 #if _OPENMP
-    printf("calculating parallel (%ld iterations)...\n", n);
+    fprintf(stderr, "calculating π in parallel (%ld iterations) ...\n", n);
 #else
-    printf("calculating single (%ld iterations)...\n", n);
+    fprintf(stderr, "calculating π single-threaded (%ld iterations) ...\n", n);
 #endif
-    printf("pi = %lf\n", approx_pi(n));
+    printf("%lf\n", approx_pi(n));
     return 0;
 }
